@@ -37,16 +37,29 @@ function addTaskToDemo(id, name, completed) {
 
     var label = document.createElement("label")
     label.innerText = name
-    label.id = name
+    label.id = name + total
 
     var btn = document.createElement("button")
+    btn.setAttribute("input_id", total)
     btn.style.float = 'right'
     var image = document.createElement('img')
     image.src = 'images.png'
     image.width = 8
     btn.appendChild(image)
     btn.onclick = function () {
-
+        var inp = document.getElementById(this.getAttribute("input_id"))
+        total -= 1
+        if (inp.checked) {
+            done -= 1
+        } else {
+            remaining -= 1
+        }
+        document.getElementById("c3").innerHTML = total
+        document.getElementById("c2").innerHTML = done
+        document.getElementById("c1").innerHTML = remaining
+        arr.splice(arr.indexOf(inp), 1);
+        document.getElementById("demo").removeChild(this.parentNode)
+        saveArrayToLocalStorage()
     }
     var div = document.createElement("div")
     div.style.width="400px"
@@ -57,9 +70,9 @@ function addTaskToDemo(id, name, completed) {
     //create input element
     var input = document.createElement("input")
 
-    input.id = arr.length
+    input.id = total
     input.setAttribute('type', 'checkbox')
-    input.name = name
+    input.name = name + total
     input.addEventListener('change', (event) => {
         if (event.currentTarget.checked) {
             remaining -= 1
@@ -79,12 +92,7 @@ function addTaskToDemo(id, name, completed) {
     titleAtt.value = name
     input.setAttributeNode(titleAtt)
 
-    //create completed attribute for task
-    const completedAtt = document.createAttribute("completed")
-    completedAtt.value = "false"
-    input.setAttributeNode(completedAtt)
-
-    document.getElementById(name).appendChild(input)
+    document.getElementById(name + total).appendChild(input)
     document.getElementById("c3").innerHTML = total
     document.getElementById("c2").innerHTML = done
     document.getElementById("c1").innerHTML = remaining
