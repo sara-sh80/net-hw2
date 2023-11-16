@@ -28,6 +28,13 @@ function getArrayFromLocalStorage() {
 
 
 function addTaskToDemo(id, name, completed) {
+    total += 1
+    if (completed) {
+        done += 1
+    } else {
+        remaining += 1
+    }
+
     var label = document.createElement("label")
     label.innerText = name
     label.id = name
@@ -40,11 +47,15 @@ function addTaskToDemo(id, name, completed) {
     input.setAttribute('type', 'checkbox')
     input.name = name
     input.addEventListener('change', (event) => {
-      if (event.currentTarget.checked) {
-        alert('checked');
-      } else {
-        alert('not checked');
-      }
+        if (event.currentTarget.checked) {
+            remaining -= 1
+            done += 1
+        } else {
+            done -= 1
+            remaining += 1
+        }
+        document.getElementById("c2").innerHTML = done
+        document.getElementById("c1").innerHTML = remaining
     })
 
     //create title attribute for task
@@ -58,15 +69,21 @@ function addTaskToDemo(id, name, completed) {
     input.setAttributeNode(completedAtt)
 
     document.getElementById(name).appendChild(input)
+    document.getElementById("c3").innerHTML = total
+    document.getElementById("c2").innerHTML = done
+    document.getElementById("c1").innerHTML = remaining
+
     return input
 }
 
 
 var arr = []
+var done = 0
+var remaining = 0
+var total = 0
 getArrayFromLocalStorage()
 
 var AddToList = () =>{
-
     //create label element
     var name = document.getElementById("inp1").value
     document.getElementById("inp1").value = ""
@@ -74,38 +91,4 @@ var AddToList = () =>{
     input = addTaskToDemo(arr.length, name, false)
     arr.push(input)
     saveArrayToLocalStorage()
-
-    var count = document.getElementById("c3").innerText
-    count = Number(count)
-    count = count + 1
-    document.getElementById("c3").innerHTML = count
-
-    var count = document.getElementById("c1").innerText
-    count = Number(count)
-    count = count + 1
-    document.getElementById("c1").innerHTML = count
-
-    saveArrayToLocalStorage(arr)
-
-    // for (i = 0; i < arr.length; i++){
-    //     // console.log(arr.length)
-    //     if (arr[i].checked){
-    //
-    //         var count = document.getElementById("c1").innerText
-    //         count = Number(count)
-    //         count = count - 1
-    //         document.getElementById("c1").innerHTML = count
-    //
-    //         var count = document.getElementById("c3").innerText
-    //         count = Number(count)
-    //         count = count - 1
-    //         document.getElementById("c3").innerHTML = count
-    //
-    //         var count = document.getElementById("c2").innerText
-    //         count = Number(count)
-    //         count = count + 1
-    //         document.getElementById("c2").innerHTML = count
-    //
-    //     }
-    // }
 }
