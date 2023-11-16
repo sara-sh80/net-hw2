@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hw2-net</title>
+    <link rel="stylesheet" href="css/header_style.css">
+    <link rel="stylesheet" href="css/footer_style.css">
+    <link rel="stylesheet" href="css/master.css">
+</head>
+<body>
+
+<!--header-->
+    <div class="header">
+        <h1>Today</h1>
+        <input id="inp1" type="text" class="search" placeholder="e.g. Buy groceries">
+        <button class="task" onclick="AddToList()">ADD Task</button>
+        <button class="searchTask"></button>
+    </div>
+
+<!--footer-->
+    <div class="footer">
+        <div class="checkList">
+            <div class="remaining">
+                <span class="list">Remaining
+                    <span class="count" id="c1">0</span>
+                </span>
+            </div>
+            <div class="completed">
+                <span class="list">Completed
+                    <span class="count" id="c2">0</span>
+                </span>
+            </div>
+            <div class="total">
+                <span class="list">Total
+                    <span class="count" id="c3">0</span>
+                </span>
+            </div>
+        </div>
+        <div id="demo">
+
+        </div>
+    </div>
+<!--<input type="checkbox" value="red" id="1" checked>-->
+</body>
+<script src="checkList.js"></script>
+</html>
