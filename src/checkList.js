@@ -38,7 +38,21 @@ function addTaskToDemo(id, name, completed) {
     var label = document.createElement("label")
     label.innerText = name
     label.id = name
-    document.getElementById("demo").appendChild(label)
+
+    var btn = document.createElement("button")
+    btn.style.float = 'right'
+    var image = document.createElement('img')
+    image.src = 'images.png'
+    image.width = 8
+    btn.appendChild(image)
+    btn.onclick = function () {
+
+    }
+    var div = document.createElement("div")
+    div.style.width="400px"
+    div.appendChild(label)
+    div.append(btn)
+    document.getElementById("demo").appendChild(div)
 
     //create input element
     var input = document.createElement("input")
@@ -56,7 +70,9 @@ function addTaskToDemo(id, name, completed) {
         }
         document.getElementById("c2").innerHTML = done
         document.getElementById("c1").innerHTML = remaining
+        saveArrayToLocalStorage()
     })
+    input.checked = completed
 
     //create title attribute for task
     const titleAtt = document.createAttribute("title")
